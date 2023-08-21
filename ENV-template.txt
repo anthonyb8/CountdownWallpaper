@@ -1,0 +1,13 @@
+
+** Adjusting all path ways to the absolute pathway ** 
+
+SCRIPT_PATH=/wallpaper/src/genertate_wallpaper.py
+LOG_PATH=/wallpaper/logs/logfile.log
+ERROR_PATH=/wallpaper/logs/errorfile.log
+CLEAR_LOG_DATE_PATH=/wallpaper/logs/last_clear_date.log
+WALLPAPER_DIR=/wallpaper/image/
+LOG_DIR=/wallpaper/logs/
+HEADER=Hello World! # Alter Header as desired
+END_DATE=18-10-2023 # Alter date as desired
+UPDATE_INTERVAL=600 # Time in seconds
+PLIST_NAME=com.<your-name>.wallpaper_countdown
