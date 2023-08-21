@@ -18,7 +18,8 @@ I created this tool to provide a continuous, visual reminder of an upcoming sign
 
 1. **Environment Setup**:
     - Navigate to the main project directory.
-    - Modify the `.env` file with the appropriate values, notably the HEADER and END_DATE.
+    - Create a `.env` file following the example in the [ENV-Template](ENV-template.txt) file.
+
 
 2. **Run the Script**:
 ``` 
@@ -26,7 +27,7 @@ python src/main.py
 ```
 
 3. **Automatic Wallpaper Update**:
-    - Transfer the `com.anthony.wallpaper_countdown.plist` from the `launch_agents` directory to `~/Library/LaunchAgents/`.
+    - Transfer the `com.<yourname>.wallpaper_countdown.plist` from the `launch_agents` directory to `~/Library/LaunchAgents/`.
     - Activate the plist with `launchd` using:
 ```
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.<yourname>.wallpaper_countdown.plist
@@ -34,9 +35,9 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.<yourname>.wallpaper
 
 
 4. **Software Requirements**:
-    - Python 3.x
+    - Python 3.8.8
     - PIL (Python Imaging Library)
-    - macOS (Tested on your macOS version; replace with the version you used)
+    - macOS (Tested on your macOS version; Ventura)
 
 ## Technologies
 
@@ -45,9 +46,5 @@ The project primarily utilizes:
 - PIL (Python Imaging Library)
 - macOS's launchd for periodic task scheduling
 
-## Collaborators
-
-- **Anthony**: Main developer and project manager. (Feel free to add any other contributors, if any.)
-
 ## License
-### MIT License
+MIT License
