@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 from datetime import datetime, date
 import time
 import subprocess
@@ -19,12 +19,19 @@ def load_env():
 ENV_VARS = load_env()
 
 
-def generate_countdown_image(end_date, header):
+def generate_countdown_image(end_date, header, background_image_path=None):
     # Define image dimensions
     width, height = 1920, 1080
     
-    # Create an empty image with a light grey background
-    image = Image.new('RGB', (width, height), 'darkgrey')
+    if background_image_path:
+        # Load the provided background image and resize it to the required dimensions
+        image = Image.open(background_image_path)
+        image = ImageOps.fit(image, (width, height))
+    else:
+        # Create an empty image with a light grey background
+        image = Image.new('RGB', (width, height), 'darkgrey')
+    
+    draw = ImageDraw.Draw(image)
     draw = ImageDraw.Draw(image)
 
     # Create and position header text
@@ -97,7 +104,7 @@ def clear_logs(directory):
         f.write(date.today().strftime("%Y-%m-%d"))
 
 def main():
-    image_path = generate_countdown_image(ENV_VARS["END_DATE"], ENV_VARS['HEADER'])
+    image_path = generate_countdown_image(ENV_VARS["END_DATE"], ENV_VARS['HEADER'], ENV_VARS['BACKGROUND_IMAGE']) # Remove background image if not using one
     set_wallpaper(image_path)
     clean_old_wallpapers(ENV_VARS["WALLPAPER_DIR"], image_path)
     clear_logs(ENV_VARS["LOG_DIR"]) # Clear log and error files if not already cleared today
