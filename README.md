@@ -49,7 +49,7 @@ I created this tool to provide a continuous, visual reminder of an upcoming sign
   ```
 
 ### 4. **Automatic Wallpaper Update**:
-  #### 1. Transfer the `com.<yourname>.wallpaper_countdown.plist` from the `launch_agents` directory to   `~/Library/LaunchAgents/`:
+  #### 1. Transfer the `plist` from the `launch_agents` directory to   `~/Library/LaunchAgents/`:
 
   ```
   cp launch_agents/com.<yourname>.wallpaper_countdown.plist ~/Library/LaunchAgents/
@@ -66,7 +66,7 @@ I created this tool to provide a continuous, visual reminder of an upcoming sign
   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.<yourname>.wallpaper_countdown.plist
   ```
   
-### 5. **Verification Steps**:
+## Verification Steps
 
 To ensure everything is set up correctly, follow these verification steps:
 
@@ -96,6 +96,37 @@ To ensure everything is set up correctly, follow these verification steps:
   ```
 
 Replace `/path/to/your/` with the actual paths specified in your `plist`.
+
+## Updating the `plist`
+
+If you've made changes to the `plist` in the project directory and need to update the one being used by `launchd`, follow these steps:
+
+### 1. **Deactivate the Current `plist`**:
+Before updating, ensure the currently running plist is unloaded:
+
+```
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.<yourname>.wallpaper_countdown.plist
+```
+
+### 2. **Copy the Updated `plist`**:
+Copy the new `plist` file from your project directory to the `LaunchAgents` directory:
+
+```
+cp launch_agents/com.<yourname>.wallpaper_countdown.plist ~/Library/LaunchAgents/
+```
+
+### 3. **Reactivate the `plist`**:
+Load the updated `plist` with `launchd`:
+
+```
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.<yourname>.wallpaper_countdown.plist
+```
+
+
+### 4. **Verification**:
+To ensure the `plist` is updated and loaded correctly, repeat the [Verification Steps](#verification-steps) described in the setup section.
+
+Remember to always keep a backup of your original `plist` file before making any changes. It's helpful for troubleshooting in case there are issues with the updated `plist`.
 
 ## Technologies
 
