@@ -6,18 +6,9 @@ import os
 import glob
 import logging
 import os
+from dotenv import load_dotenv
 
-# Load .env values
-def load_env():
-    env_vars = {}
-    with open('.env', 'r') as file:
-        for line in file.readlines():
-            key, value = line.strip().split('=')
-            env_vars[key] = value
-    return env_vars
-
-ENV_VARS = load_env()
-
+load_dotenv()  # take environment variables from .env.
 
 def generate_countdown_image(end_date, header, background_image_path=None):
     # Define image dimensions
@@ -59,7 +50,7 @@ def generate_countdown_image(end_date, header, background_image_path=None):
 
     # Save the image and log the update
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    image_path = os.path.join(ENV_VARS["WALLPAPER_DIR"], f'countdown_wallpaper_{timestamp}.jpg')
+    image_path = os.path.join(os.getenv("WALLPAPER_DIR"), f'countdown_wallpaper_{timestamp}.jpg')
     image.save(image_path)
     update_log(timestamp)
     
@@ -73,7 +64,7 @@ def set_wallpaper(image_path):
 
 def update_log(timestamp):
     # Log the time of the wallpaper update
-    logging.basicConfig(filename=ENV_VARS["LOG_PATH"], level=logging.DEBUG)
+    logging.basicConfig(filename=os.getenv("LOG_PATH"), level=logging.DEBUG)
     logging.info(f'Wallpaper Timer last updated: {timestamp}')
 
 
@@ -104,10 +95,10 @@ def clear_logs(directory):
         f.write(date.today().strftime("%Y-%m-%d"))
 
 def main():
-    image_path = generate_countdown_image(ENV_VARS["END_DATE"], ENV_VARS['HEADER'], ENV_VARS['BACKGROUND_IMAGE']) # Remove background image if not using one
+    image_path = generate_countdown_image(os.getenv("END_DATE"), os.getenv('HEADER'), os.getenv('BACKGROUND_IMAGE')) # Remove background image if not using one
     set_wallpaper(image_path)
-    clean_old_wallpapers(ENV_VARS["WALLPAPER_DIR"], image_path)
-    clear_logs(ENV_VARS["LOG_DIR"]) # Clear log and error files if not already cleared today
+    clean_old_wallpapers(os.getenv("WALLPAPER_DIR"), image_path)
+    clear_logs(os.getenv("LOG_DIR")) # Clear log and error files if not already cleared today
 
 if __name__ == '__main__':
     main()
