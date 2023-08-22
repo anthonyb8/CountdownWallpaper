@@ -6,6 +6,16 @@ This project generates dynamic wallpapers showing a countdown to a specific date
 
 I created this tool to provide a continuous, visual reminder of an upcoming significant event. It's a constant motivator, ensuring that every glance at the desktop reminds me of the days, hours, and minutes left to my target date.
 
+#### Plain Background Example
+
+![Example Image](./image/example1-countdown_wallpaper_20230821160636.jpg)
+
+#### Custom Background Example
+
+![Example Image](./image/example2-countdown_wallpaper_20230821161550.jpg)
+
+
+
 ## Features
 
 - **Dynamic Wallpaper Generation**: This feature allows for automatic generation of wallpapers with an updated countdown.
