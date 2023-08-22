@@ -6,6 +6,11 @@ load_dotenv()  # take environment variables from .env.
 def generate_plist():
     plist = Element('plist', version="1.0")
     plist_dict = SubElement(plist, 'dict')
+
+    # SubElement(plist_dict, 'key').text = "Label"
+    SubElement(plist_dict, 'key').text = "Developer"
+    SubElement(plist_dict, 'string').text = os.getenv('DEV_NAME')
+    
     
     # Label
     SubElement(plist_dict, 'key').text = "Label"
@@ -14,7 +19,9 @@ def generate_plist():
     # Program Arguments
     SubElement(plist_dict, 'key').text = "ProgramArguments"
     args_array = SubElement(plist_dict, 'array')
-    SubElement(args_array, 'string').text = "/usr/local/bin/python3"
+
+     # Use Python from the virtual environment
+    SubElement(args_array, 'string').text = os.getenv("VENV_PATH")
     SubElement(args_array, 'string').text = os.getenv("SCRIPT_PATH")
     
     # Start Interval
